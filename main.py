@@ -1,36 +1,48 @@
 # Abandon all hope, ye who enter here
 import console
+from typing import Callable
 
 
-def show_menu(message: str, items: list[str]) -> int:
+class MenuItem:
+    def __init__(self, name: str, action: Callable):
+        self.name = name
+        self.action = action
+
+    def __str__(self):
+        return self.name
+
+
+def show_menu(message: str, items: list[MenuItem]) -> None:
     if message:
         print(message)
 
     for i, item in enumerate(items):
         print(f"{i + 1} - {item}")
 
+    choice = 0
+    action: Callable
     while True:
         try:
             choice = int(input("Choice: ")) - 1
-            if choice in range(len(items)):
-                return choice
-            else:
-                raise ValueError()
-        except ValueError:
+            action = items[choice].action
+            break
+        except (ValueError, IndexError):
             print("Invalid choice.")
+    action()
 
 
 def main() -> int:
     while True:
         console.clear()
-
-        match show_menu("Main Menu", ["Calculate AABB from OBJ mesh", "Exit"]):
-            case 0:
-                print("TODO: Implement")  # TODO: Implement
-            case 1:
-                return 0
-
-    return 0
+        show_menu(
+            "Main Menu",
+            [
+                MenuItem(
+                    "Calculate AABB of a mesh", lambda: print("TODO: Implement.")
+                ),  # TODO: Implement
+                MenuItem("Exit", lambda: exit(0)),
+            ],
+        )
 
 
 if __name__ == "__main__":
