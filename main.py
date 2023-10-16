@@ -60,6 +60,44 @@ def do_aabb() -> None:
     input("Press enter to continue...")
 
 
+def do_number_guess() -> None:
+    from random import randint
+
+    print("Guess a number between 1 and 10.")
+    number = randint(1, 10)
+    attempts = 0
+    max_attempts: int
+    if randint(0, 4) == 0:
+        print("HARD MODE UNLOCKED")
+        max_attempts = 3
+    else:
+        max_attempts = 5
+
+    while attempts < max_attempts:
+        while True:
+            try:
+                print(f"Attempts left: {max_attempts - attempts}")
+                guess = int(input("Guess: "))
+                if not guess in range(1, 21):
+                    raise ValueError
+                break
+            except ValueError:
+                print("Invalid guess.")
+
+        if guess == number:
+            print(f"You win! Took you {attempts + 1} attempts.")
+            break
+        elif guess < number:
+            print("Too low.")
+        else:
+            print("Too high.")
+        attempts += 1
+
+    if attempts == max_attempts:
+        print(f"You lose. The number was {number}.")
+    input("Press enter to continue...")
+
+
 def main() -> int:
     while True:
         console.clear()
@@ -67,6 +105,7 @@ def main() -> int:
             "Main Menu",
             [
                 MenuItem("Calculate AABB of a mesh", do_aabb),  # TODO: Implement
+                MenuItem("Number guessing game", do_number_guess),
                 MenuItem("Exit", lambda: exit(0)),
             ],
         )
