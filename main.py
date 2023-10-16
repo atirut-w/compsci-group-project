@@ -98,6 +98,23 @@ def do_number_guess() -> None:
     input("Press enter to continue...")
 
 
+def do_avg() -> None:
+    print("Enter numbers to calculate their average. Enter `q` to stop.")
+    numbers: list[int] = []
+
+    while True:
+        try:
+            number = input("Number: ")
+            if number == "q":
+                break
+            numbers.append(int(number))
+        except ValueError:
+            print("Invalid number.")
+    
+    print(f"Average: {sum(numbers) / len(numbers)}")
+    input("Press enter to continue...")
+
+
 def main() -> int:
     while True:
         console.clear()
@@ -106,6 +123,7 @@ def main() -> int:
             [
                 MenuItem("Calculate AABB of a mesh", do_aabb),
                 MenuItem("Number guessing game", do_number_guess),
+                MenuItem("Calculate average of numbers", do_avg),
                 MenuItem("Exit", lambda: exit(0)),
             ],
         )
