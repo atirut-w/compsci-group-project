@@ -104,7 +104,7 @@ def main() -> int:
         show_menu(
             "Main Menu",
             [
-                MenuItem("Calculate AABB of a mesh", do_aabb),  # TODO: Implement
+                MenuItem("Calculate AABB of a mesh", do_aabb),
                 MenuItem("Number guessing game", do_number_guess),
                 MenuItem("Exit", lambda: exit(0)),
             ],
