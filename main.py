@@ -5,7 +5,7 @@ from obj import Obj, Vector3
 
 
 class MenuItem:
-    def __init__(self, name: str, action: Callable):
+    def __init__(self, name: str, action: Callable[[], None]):
         self.name = name
         self.action = action
 
