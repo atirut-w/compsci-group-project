@@ -73,6 +73,10 @@ def do_knockoff_forth() -> None:
 
     def eval_word(word: str) -> None:
         match word:
+            case "duck": # Super secret word. Prints the meowing duck.
+                print("    _")
+                print(".__(.)< (MEOW)")
+                print(" \\___)")
             case "stack":
                 padding = len(str(len(stack)))
 
